@@ -6,7 +6,7 @@
 #    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 10:58:09 by mcatalan@st       #+#    #+#              #
-#    Updated: 2023/10/02 15:21:50 by mcatalan         ###   ########.fr        #
+#    Updated: 2023/10/02 15:44:58 by mcatalan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,18 +30,13 @@ MLX_FLAGS 	= -Lincludes/mlx -lmlx -framework OpenGL -framework AppKit
 
 CFLAGS  =  -Wall -Wextra -Werror
 
-all:		subsystems$(NAME)
+INCLUDE = -I./
 
-subsystems:
-	@make -s -C $(MLX_DIR)
+$(LIBFT_D)$(LIBFT):
+	@make --no-print-directory -s -C $(LIBFT_D)
 
-makelibft:
-	@make --no-print-directory -C $(LIBFT_D)
-	
-makeftprintf:
-	@make --no-print-directory -C $(FT_PRINTF_D)
-	
-# make
+$(FT_PRINTF_D)$(FT_PRINTF):
+	@make --no-print-directory -s -C $(FT_PRINTF_D)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(HEADER) -MMD -Imlx -c $< -o $@
@@ -50,12 +45,23 @@ makeftprintf:
 $(NAME):	$(OBJ) $(LIBFT_D)$(LIBFT) $(FT_PRINTF_D)$(FT_PRINTF)
 	@$(CC) $(OBJ) -o $(NAME) $(MLX_FLAGS) $(MLX_LIB)
 
+all:		subsystems $(NAME)
+
+subsystems:
+	@make	--no-print-directory -C	$(MLX_DIR)
+
+# makelibft:
+# 	@make --no-print-directory -C $(LIBFT_D)
+	
+# makeftprintf:
+# 	@make --no-print-directory -C $(FT_PRINTF_D)
+
 clean:
 			rm -f $(OBJ)
 
 fclean:		clean
 			rm -f $(NAME)
 
-re:			all clean
+re:			fclean all
 
 .PHONY:		all bonus clean fclean re
