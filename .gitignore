@@ -1,0 +1,3 @@
+#.gitignore for files
+*.DS_Store
+*.vscode
