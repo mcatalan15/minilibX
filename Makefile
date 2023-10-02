@@ -3,12 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
+#    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 10:58:09 by mcatalan@st       #+#    #+#              #
-#    Updated: 2023/10/02 14:48:54 by mcatalan@st      ###   ########.fr        #
+#    Updated: 2023/10/02 15:21:50 by mcatalan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+LIBFT_D	= includes/libft/
+LIBFT	= libft.a
+
+FT_PRINTF_D	=	includes/ft_printf/
+FT_PRINTF	=	ft_printf.a
 
 CC = gcc
 
@@ -24,17 +30,25 @@ MLX_FLAGS 	= -Lincludes/mlx -lmlx -framework OpenGL -framework AppKit
 
 CFLAGS  =  -Wall -Wextra -Werror
 
+all:		subsystems$(NAME)
+
+subsystems:
+	@make -s -C $(MLX_DIR)
+
+makelibft:
+	@make --no-print-directory -C $(LIBFT_D)
+	
+makeftprintf:
+	@make --no-print-directory -C $(FT_PRINTF_D)
+	
+# make
+
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(HEADER) -MMD -Imlx -c $< -o $@
 
 
-$(NAME):	$(OBJ)
+$(NAME):	$(OBJ) $(LIBFT_D)$(LIBFT) $(FT_PRINTF_D)$(FT_PRINTF)
 	@$(CC) $(OBJ) -o $(NAME) $(MLX_FLAGS) $(MLX_LIB)
-
-all:		subsystems$(NAME)
-
-subsystems:
-	@make -s -C $(MLX_DIR) 
 
 clean:
 			rm -f $(OBJ)
