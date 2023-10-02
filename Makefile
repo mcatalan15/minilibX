@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mcatalan <mcatalan@student.42barcelona.    +#+  +:+       +#+         #
+#    By: mcatalan@student.42barcelona.com <mcata    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/04 10:58:09 by mcatalan@st       #+#    #+#              #
-#    Updated: 2023/10/02 13:19:21 by mcatalan         ###   ########.fr        #
+#    Updated: 2023/10/02 14:48:54 by mcatalan@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MLX_DIR 	= includes/mlx/
 MLX_LIB 	= $(MLX_DIR)libmlx.a
 MLX_FLAGS 	= -Lincludes/mlx -lmlx -framework OpenGL -framework AppKit
 
-CFLAGS  =  -Wall -Werror -Wextra
+CFLAGS  =  -Wall -Wextra -Werror
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(HEADER) -MMD -Imlx -c $< -o $@
